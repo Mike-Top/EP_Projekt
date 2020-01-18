@@ -53,28 +53,29 @@
         android:id="@+id/code_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_enable_disable"
-        android:background="@android:color/darker_gray"
+        android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
         android:gravity="center"
         android:padding="10dp"
         android:text="Bitte QR-Code Scannen..."
-        android:textColor="@android:color/background_dark"
-        android:textSize="20sp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"/>
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:textStyle="normal" />
 
     <ToggleButton
         android:id="@+id/btn_enable_disable"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottom_navigation"
         android:layout_centerHorizontal="true"
-        android:checked="false"
         android:layout_marginLeft="7dp"
-        android:textOff="STOP"
-        android:textOn="START" />
+        android:checked="false"
+        android:textOff="start"
+        android:textOn="stop"
+        android:backgroundTint="@color/cardview_light_background"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"

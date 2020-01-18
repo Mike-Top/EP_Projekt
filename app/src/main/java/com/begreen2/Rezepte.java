@@ -29,6 +29,8 @@ public class Rezepte extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rezepte);
+        getSupportActionBar().setTitle("Rezepte");
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 

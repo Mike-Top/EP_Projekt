@@ -12,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class UEbersicht extends AppCompatActivity {
 
@@ -20,17 +22,47 @@ public class UEbersicht extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uebersicht);
 
-
+        getSupportActionBar().setTitle("Übersicht");
         // TestString für die Liste:
-        String items[] = new String[] {"apple", "banana"};
+        ArrayList<String> list = new ArrayList<>();
 
-        // --> Liste:
-        ListView listView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        //Liste<String> liste = new Liste;
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Apple");
+
+
+        /**  Liste  **/
+        ListView listView = (ListView) findViewById(R.id.listViewNEU);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, list);
         listView.setAdapter(adapter);
 
 
-        // --> BottomNavigation:
+
+        /**  BottomNavigation **/
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         // Setze QR-Menü als Standard
