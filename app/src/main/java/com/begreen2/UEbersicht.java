@@ -9,6 +9,10 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+
 public class UEbersicht extends AppCompatActivity {
 
     @Override
@@ -16,6 +20,17 @@ public class UEbersicht extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uebersicht);
 
+
+        // TestString für die Liste:
+        String items[] = new String[] {"apple", "banana"};
+
+        // --> Liste:
+        ListView listView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
+        listView.setAdapter(adapter);
+
+
+        // --> BottomNavigation:
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         // Setze QR-Menü als Standard
