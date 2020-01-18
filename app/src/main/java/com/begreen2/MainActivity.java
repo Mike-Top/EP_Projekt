@@ -36,10 +36,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     private SurfaceView surfaceView;
     private QREader qrEader;
- //   private Liste listeUeberblick = new Liste();
     private ArrayList<ArrayList> listNameAndDate = new ArrayList<ArrayList>();
-    private String testString = "Teststring";
-    private String[] uebergabeArray = {"Hafer, 22.22.2222, Flocken2, 44.44.4444"};
+    private String[] uebergabeArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,22 +138,14 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         String[] arrayTmp = uebergabeArray;
                         for (int i = 0; i < arrayTmp.length; i+=2) {
 
-                //            if (i == 0) listeUeberblick.list.add(arrayTmp[0]);//           else if (i == 1) listeUeberblick.dateList.add(arrayTmp[1]);
-//                            if      (i % 2 == 0) listeUeberblick.list.add(arrayTmp[i]);
-//                            else if (i % 2 == 1) listeUeberblick.dateList.add(arrayTmp[i]);
-
                             ArrayList tmpList = new ArrayList(2);
 
                             if      (i % 2 == 0){
                                 tmpList.add(arrayTmp[i]);
                                 tmpList.add(arrayTmp[i+1]);
                             }
-                         //   else if (i+1 % 2 == 1) tmpList.add(arrayTmp[i+1]);
-
                             listNameAndDate.add(tmpList);
                         }
-
-
 
                         //Testausgabe von 2 Werten
                         test.setText((String) listNameAndDate.get(0).get(0));

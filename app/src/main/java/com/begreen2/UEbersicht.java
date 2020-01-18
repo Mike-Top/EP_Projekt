@@ -19,10 +19,8 @@ import java.util.ArrayList;
 
 public class UEbersicht extends AppCompatActivity implements Serializable {
 
-    private Liste liste;
     private TextView test;
     private String[] uebergabeArray;
-//    private Liste listeNameUndDatum;
     private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
 
     @Override
@@ -38,6 +36,8 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         ListView listView = (ListView) findViewById(R.id.listView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         listView.setAdapter(adapter);
+
+        test = findViewById(R.id.testAusgabeUebersicht);
 
 
         // --> BottomNavigation:
@@ -68,25 +68,22 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         Bundle extras = getIntent().getExtras();
         if (extras!=null) {
             uebergabeArray = extras.getStringArray("uebergabeKey");
-        }
-        test = findViewById(R.id.testAusgabeUebersicht);
-    //    test.setText(testStringNeu);
+        //    String[] arrayTmp = uebergabeArray;
+            for (int i = 0; i < uebergabeArray.length; i+=2) {
+                ArrayList tmpList = new ArrayList(2);
 
-        String[] arrayTmp = uebergabeArray;
-        for (int i = 0; i < arrayTmp.length; i+=2) {
-            ArrayList tmpList = new ArrayList(2);
-
-            if      (i % 2 == 0){
-                tmpList.add(arrayTmp[i]);
-                tmpList.add(arrayTmp[i+1]);
+                if      (i % 2 == 0){
+                    tmpList.add(uebergabeArray[i]);
+                    tmpList.add(uebergabeArray[i+1]);
+                }
+                listeNameundDatum.add(tmpList);
             }
-            listeNameundDatum.add(tmpList);
+            //Testausgabe von 2 Werten
+            test.setText((String) listeNameundDatum.get(0).get(0));
         }
 
 
 
-        //Testausgabe von 2 Werten
-        test.setText((String) listeNameundDatum.get(0).get(0));
 
 
     }
