@@ -55,7 +55,7 @@ public class UEbersicht extends AppCompatActivity {
 
 
         /**  Liste  **/
-        ListView listView = (ListView) findViewById(R.id.listViewNEU);
+        ListView listView = (ListView) findViewById(R.id.listView);
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, list);
         listView.setAdapter(adapter);
