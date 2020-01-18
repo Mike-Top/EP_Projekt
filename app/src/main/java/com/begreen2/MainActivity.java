@@ -77,59 +77,6 @@ public class MainActivity extends AppCompatActivity {
         });
         //////////////////////////////////////////////////////
 
-        TextViewResult = (TextView) findViewById(R.id.testAusgabe);
-        OkHttpClient client = new OkHttpClient();
-
-        // Besipeil API
-        String url = "https://reqres.in/api/users/2";
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-
- ///////////  API Spoonacular
-//        Request request = new Request.Builder()
-//                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&number=10&offset=0&type=main%20course&query=burger")
-//                .get()
-//                .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-//                .addHeader("x-rapidapi-key", "e406a6096dmsh4677d4f778bf5f4p17452fjsna50032559fb4")
-//                .build();
-
-
-        // Enqueue - Background request, weil geht nicht in Main
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    final String myResponse = response.body().string();
-
-                    //   ------------- Api Test für Klassen mit Beispiel API --------> Funktioniert
-                       TestApiData myobject = new Gson().fromJson(myResponse, TestApiData.class);
-                       final String test = myobject.getData().getEmail();
-
-                    // ---------------- Spoonacular API -----------------------> FUNKTIONIERT AUCH - Verbraucht Requests
-                    //SpoonacularApi myobject = new Gson().fromJson(myResponse, SpoonacularApi.class);
-                    //final String title = myobject.getResults().get(0).getTitle();
-
-
-
-
-                    // weil kein Zugriff auf Background wird Mainactivity aufgerufen
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            TextViewResult.setText(test);          // Test API Ausgabe
-                           // TextViewResult.setText(title);       // Spoonacular Testausgabe
-                        }
-                    });
-                }
-            }
-        });
 
         //Permission
         Dexter.withActivity(this).withPermission(Manifest.permission.CAMERA).withListener(new PermissionListener() {
