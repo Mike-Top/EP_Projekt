@@ -11,11 +11,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UEbersicht extends AppCompatActivity {
+public class UEbersicht extends AppCompatActivity implements Serializable {
+
+    private TextView test;
+    private String[] uebergabeArray;
+    private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +63,7 @@ public class UEbersicht extends AppCompatActivity {
 
 
         /**  Liste  **/
-        ListView listView = (ListView) findViewById(R.id.listViewNEU);
+        ListView listView = (ListView) findViewById(R.id.listViewNeu);
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, list);
         listView.setAdapter(adapter);
@@ -64,10 +72,8 @@ public class UEbersicht extends AppCompatActivity {
 
         /**  BottomNavigation **/
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         // Setze QR-Menü als Standard
         bottomNavigationView.setSelectedItemId(R.id.uebersicht);
-
         // "Auswahl" wechseln
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -88,5 +94,28 @@ public class UEbersicht extends AppCompatActivity {
             }
         });
 
+
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null) {
+            uebergabeArray = extras.getStringArray("uebergabeKey");
+        //    String[] arrayTmp = uebergabeArray;
+            for (int i = 0; i < uebergabeArray.length; i+=2) {
+                ArrayList tmpList = new ArrayList(2);
+
+                if      (i % 2 == 0){
+                    tmpList.add(uebergabeArray[i]);
+                    tmpList.add(uebergabeArray[i+1]);
+                }
+                listeNameundDatum.add(tmpList);
+            }
+            //Testausgabe von 2 Werten
+            test.setText((String) listeNameundDatum.get(0).get(0));
+        }
+
+
+
+
+
     }
 }
+

@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -23,19 +21,13 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 import github.nisrulz.qreader.QRDataListener;
 import github.nisrulz.qreader.QREader;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable {
 
     private TextView txt_result;
     private TextView test;
@@ -44,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SurfaceView surfaceView;
     private QREader qrEader;
-    private Liste listeUeberblick = new Liste();
-
+    private ArrayList<ArrayList> listNameAndDate = new ArrayList<ArrayList>();
+    private String[] uebergabeArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.qr_code:
                         return true;
                     case R.id.uebersicht:
-                        startActivity(new Intent(getApplicationContext(), UEbersicht.class));
+                        Intent i = new Intent(getApplicationContext(), UEbersicht.class);
+                        if(uebergabeArray!=null) {i.putExtra("uebergabeKey", uebergabeArray);}
+                        startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.recipe:
@@ -138,18 +132,24 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         txt_result.setText(data);
 
+                        final String data2 = "Banane, 22.22.2222, Apfel, 33.33.3333";
                         // Eingelesener QR Code wird unterteilt in Arrays
-                        String[] arrayTmp = data.split(", ");
-                        for (int i = 0; i < arrayTmp.length; i++) {
+                        uebergabeArray = data.split(", ");
+                        String[] arrayTmp = uebergabeArray;
+                        for (int i = 0; i < arrayTmp.length; i+=2) {
 
-                //            if (i == 0) listeUeberblick.list.add(arrayTmp[0]);//           else if (i == 1) listeUeberblick.dateList.add(arrayTmp[1]);
-                            if      (i % 2 == 0) listeUeberblick.list.add(arrayTmp[i]);
-                            else if (i % 2 == 1) listeUeberblick.dateList.add(arrayTmp[i]);
+                            ArrayList tmpList = new ArrayList(2);
+
+                            if      (i % 2 == 0){
+                                tmpList.add(arrayTmp[i]);
+                                tmpList.add(arrayTmp[i+1]);
+                            }
+                            listNameAndDate.add(tmpList);
                         }
 
-                        //Testausgabe von 2 TextViews
-                        test.setText(listeUeberblick.list.get(0));
-                        date.setText(listeUeberblick.dateList.get(3));
+                        //Testausgabe von 2 Werten
+                        test.setText((String) listNameAndDate.get(0).get(0));
+                        date.setText((String) listNameAndDate.get(1).get(1));
                     }
                 });
             }
