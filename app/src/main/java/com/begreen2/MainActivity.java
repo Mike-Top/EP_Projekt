@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -37,7 +37,6 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button button;
     private TextView txt_result;
     private TextView test;
     private TextView date;
@@ -53,23 +52,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Activity Button
-        /*
-        button = (Button) findViewById(R.id.button_a);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openActivity2();
-            }
-        });
-
-         */
-
+        // NAVIGATIONSMENÜ ////////////////////////////////////
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         // Setze QR-Menü als Standard
         bottomNavigationView.setSelectedItemId(R.id.qr_code);
-
         // "Auswahl" wechseln
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -89,36 +75,26 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        //////////////////////////////////////////////////////
 
         TextViewResult = (TextView) findViewById(R.id.testAusgabe);
         OkHttpClient client = new OkHttpClient();
 
+        // Besipeil API
         String url = "https://reqres.in/api/users/2";
-
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
 
-  /*
  ///////////  API Spoonacular
-        Request request = new Request.Builder()
-                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer?q=How%20much%20vitamin%20c%20is%20in%202%20apples%253F")
-                .get()
-                .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "e406a6096dmsh4677d4f778bf5f4p17452fjsna50032559fb4")
-                .build();
-*/
+//        Request request = new Request.Builder()
+//                .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?diet=vegetarian&excludeIngredients=coconut&number=10&offset=0&type=main%20course&query=burger")
+//                .get()
+//                .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+//                .addHeader("x-rapidapi-key", "e406a6096dmsh4677d4f778bf5f4p17452fjsna50032559fb4")
+//                .build();
 
-  /*
-        try  {
-            final Response response = client.newCall(request).execute();
-            TextViewResult.setText(response.body().string());
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-*/
 
         // Enqueue - Background request, weil geht nicht in Main
         client.newCall(request).enqueue(new Callback() {
@@ -132,14 +108,23 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     final String myResponse = response.body().string();
 
-                    //           JSONObject myobject = new JSONObject(myResponse);
+                    //   ------------- Api Test für Klassen mit Beispiel API --------> Funktioniert
+                       TestApiData myobject = new Gson().fromJson(myResponse, TestApiData.class);
+                       final String test = myobject.getData().getEmail();
+
+                    // ---------------- Spoonacular API -----------------------> FUNKTIONIERT AUCH - Verbraucht Requests
+                    //SpoonacularApi myobject = new Gson().fromJson(myResponse, SpoonacularApi.class);
+                    //final String title = myobject.getResults().get(0).getTitle();
 
 
-                    // weil kein Zugriff auf Background - Mainactivity aufrufen
+
+
+                    // weil kein Zugriff auf Background wird Mainactivity aufgerufen
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            TextViewResult.setText(myResponse);
+                            TextViewResult.setText(test);          // Test API Ausgabe
+                           // TextViewResult.setText(title);       // Spoonacular Testausgabe
                         }
                     });
                 }
