@@ -11,9 +11,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 
-public class UEbersicht extends AppCompatActivity {
+public class UEbersicht extends AppCompatActivity implements Serializable {
+
+    private Liste liste;
+    private TextView test;
+    private String[] uebergabeArray;
+//    private Liste listeNameUndDatum;
+    private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +42,8 @@ public class UEbersicht extends AppCompatActivity {
 
         // --> BottomNavigation:
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         // Setze QR-Menü als Standard
         bottomNavigationView.setSelectedItemId(R.id.uebersicht);
-
         // "Auswahl" wechseln
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -56,5 +64,31 @@ public class UEbersicht extends AppCompatActivity {
             }
         });
 
+
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null) {
+            uebergabeArray = extras.getStringArray("uebergabeKey");
+        }
+        test = findViewById(R.id.testAusgabeUebersicht);
+    //    test.setText(testStringNeu);
+
+        String[] arrayTmp = uebergabeArray;
+        for (int i = 0; i < arrayTmp.length; i+=2) {
+            ArrayList tmpList = new ArrayList(2);
+
+            if      (i % 2 == 0){
+                tmpList.add(arrayTmp[i]);
+                tmpList.add(arrayTmp[i+1]);
+            }
+            listeNameundDatum.add(tmpList);
+        }
+
+
+
+        //Testausgabe von 2 Werten
+        test.setText((String) listeNameundDatum.get(0).get(0));
+
+
     }
 }
+
