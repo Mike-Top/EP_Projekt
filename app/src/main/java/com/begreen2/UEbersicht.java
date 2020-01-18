@@ -1,14 +1,19 @@
 package com.begreen2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +29,8 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
     private TextView test;
     private String[] uebergabeArray;
     private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +121,48 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
 
 
+    }
+
+}
 
 
+class QRListAdapter extends ArrayAdapter<String> {
+
+    private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
+
+    private Context qrContext;
+    int mresource;
+
+    public QRListAdapter(Context context, int resource, ArrayList<String> objects) {
+        super(context, resource, objects);
+        qrContext = context;
+        mresource = resource;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        //String name = getItem(position).getName();
+        //String birthday = getItem(position).getBirthday();
+        // String sex = getItem(position).getSex();
+
+        // Test Strings....
+        String name = "Tomate";
+        String datum = "12.12.2012";
+
+        Liste liste = new Liste();
+
+        LayoutInflater inflater = LayoutInflater.from(qrContext);
+        convertView = inflater.inflate(mresource, parent, false);
+
+        TextView textViewName = (TextView) convertView.findViewById(R.id.textView1);
+        TextView textViewDatum = (TextView) convertView.findViewById(R.id.textView2);
+
+        // für den test nur die strings hier drinnen (von etwas weiter oben)
+        textViewName.setText(name);
+        textViewDatum.setText(datum);
+
+        return convertView;
     }
 }
 
