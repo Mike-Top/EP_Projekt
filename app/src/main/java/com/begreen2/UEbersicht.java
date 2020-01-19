@@ -28,8 +28,7 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
     private TextView test;
     private String[] uebergabeArray;
-    private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
-
+    public ArrayList<ArrayList> listeNameundDatum = new ArrayList();
 
 
     @Override
@@ -68,11 +67,33 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         list.add("Banana");
         list.add("Apple");
 
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null) {
+            uebergabeArray = extras.getStringArray("uebergabeKey");
+            //    String[] arrayTmp = uebergabeArray;
+            for (int i = 0; i < uebergabeArray.length; i+=2) {
+                ArrayList tmpList = new ArrayList(2);
+
+                if (i % 2 == 0) {
+                    tmpList.add(uebergabeArray[i]);
+                    tmpList.add(uebergabeArray[i+1]);
+                }
+                listeNameundDatum.add(tmpList);
+            }
+            //Testausgabe von 2 Werten
+            test.setText((String) listeNameundDatum.get(0).get(0));
+        }
+
+
+
+
+
 
         /**  Liste  **/
         ListView listView = (ListView) findViewById(R.id.listViewNeu);
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, list);
+        //adapter.datenUebergabe(listeNameundDatum);
         listView.setAdapter(adapter);
 
 
@@ -102,14 +123,14 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         });
 
 
-        Bundle extras = getIntent().getExtras();
+        /*Bundle extras = getIntent().getExtras();
         if (extras!=null) {
             uebergabeArray = extras.getStringArray("uebergabeKey");
         //    String[] arrayTmp = uebergabeArray;
             for (int i = 0; i < uebergabeArray.length; i+=2) {
                 ArrayList tmpList = new ArrayList(2);
 
-                if      (i % 2 == 0){
+                if (i % 2 == 0) {
                     tmpList.add(uebergabeArray[i]);
                     tmpList.add(uebergabeArray[i+1]);
                 }
@@ -117,52 +138,13 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
             }
             //Testausgabe von 2 Werten
             test.setText((String) listeNameundDatum.get(0).get(0));
-        }
+        }*/
 
 
 
-    }
+    } // on Create ENDE
+
 
 }
 
-
-class QRListAdapter extends ArrayAdapter<String> {
-
-    private ArrayList<ArrayList> listeNameundDatum = new ArrayList();
-
-    private Context qrContext;
-    int mresource;
-
-    public QRListAdapter(Context context, int resource, ArrayList<String> objects) {
-        super(context, resource, objects);
-        qrContext = context;
-        mresource = resource;
-    }
-
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        //String name = getItem(position).getName();
-        //String birthday = getItem(position).getBirthday();
-        // String sex = getItem(position).getSex();
-
-        // Test Strings....
-        String name = "Tomate";
-        String datum = "12.12.2012";
-
-        Liste liste = new Liste();
-
-        LayoutInflater inflater = LayoutInflater.from(qrContext);
-        convertView = inflater.inflate(mresource, parent, false);
-
-        TextView textViewName = (TextView) convertView.findViewById(R.id.textView1);
-        TextView textViewDatum = (TextView) convertView.findViewById(R.id.textView2);
-
-        // für den test nur die strings hier drinnen (von etwas weiter oben)
-        textViewName.setText(name);
-        textViewDatum.setText(datum);
-
-        return convertView;
-    }
-}
 
