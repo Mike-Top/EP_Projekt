@@ -106,15 +106,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
 
 
-    private void openActivity2() {
-        Intent intent = new Intent(this, Main2Activity.class);
-        startActivity(intent);
-    }
+
 
     private void setupCamera() {
         txt_result = (TextView) findViewById(R.id.code_info);
-        test = (TextView) findViewById(R.id.anzeigeListe);
-        date = (TextView) findViewById(R.id.date);
+
 
         final ToggleButton btn_on_off = (ToggleButton) findViewById(R.id.btn_enable_disable);
 
