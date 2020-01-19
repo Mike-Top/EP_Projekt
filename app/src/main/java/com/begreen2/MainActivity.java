@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     private SurfaceView surfaceView;
     private QREader qrEader;
-    private ArrayList<ArrayList> listNameAndDate = new ArrayList<ArrayList>();
+    private ArrayList<ArrayList<String>> listNameAndDate = new ArrayList<ArrayList<String>>();
     private String[] uebergabeArray;
+ //   private String mainBla = "bla";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     case R.id.uebersicht:
                         Intent i = new Intent(getApplicationContext(), UEbersicht.class);
                         if(uebergabeArray!=null) {i.putExtra("uebergabeKey", uebergabeArray);}
+                 //       if(mainBla!=null) {i.putExtra("bla", mainBla);}
                         startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
@@ -132,9 +134,10 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     public void run() {
                         txt_result.setText(data);
 
+                        final String data3 = data;
                         final String data2 = "Banane, 22.22.2222, Apfel, 33.33.3333";
                         // Eingelesener QR Code wird unterteilt in Arrays
-                        uebergabeArray = data.split(", ");
+                        uebergabeArray = data3.split(", ");
                         String[] arrayTmp = uebergabeArray;
                         for (int i = 0; i < arrayTmp.length; i+=2) {
 

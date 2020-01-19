@@ -28,7 +28,8 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
     private TextView test;
     private String[] uebergabeArray;
-    public ArrayList<ArrayList> listeNameundDatum = new ArrayList();
+    public ArrayList<ArrayList<String>> listeNameundDatum = new ArrayList();
+    private String bla;
 
 
     @Override
@@ -39,6 +40,8 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         getSupportActionBar().setTitle("Übersicht");
         // TestString für die Liste:
         ArrayList<String> list = new ArrayList<>();
+
+        test = (TextView) findViewById(R.id.textViewUebersicht);
 
         //Liste<String> liste = new Liste;
         list.add("Apple");
@@ -67,16 +70,23 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         list.add("Banana");
         list.add("Apple");
 
+
+//        Bundle extras = getIntent().getExtras();
+//        if (extras!=null) {
+//            bla = extras.getString("bla");}
+//
+//        test.setText(bla);
+
         Bundle extras = getIntent().getExtras();
         if (extras!=null) {
             uebergabeArray = extras.getStringArray("uebergabeKey");
-            //    String[] arrayTmp = uebergabeArray;
-            for (int i = 0; i < uebergabeArray.length; i+=2) {
+            String[] arrayTmp = uebergabeArray;
+            for (int i = 0; i < arrayTmp.length; i+=2) {
                 ArrayList tmpList = new ArrayList(2);
 
                 if (i % 2 == 0) {
-                    tmpList.add(uebergabeArray[i]);
-                    tmpList.add(uebergabeArray[i+1]);
+                    tmpList.add(arrayTmp[i]);
+                    tmpList.add(arrayTmp[i+1]);
                 }
                 listeNameundDatum.add(tmpList);
             }
@@ -85,15 +95,12 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         }
 
 
-
-
-
-
         /**  Liste  **/
         ListView listView = (ListView) findViewById(R.id.listViewNeu);
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, list);
-        //adapter.datenUebergabe(listeNameundDatum);
+        adapter.datenUebergabe(listeNameundDatum);
+        //adapter.datenUebergabe2(bla);
         listView.setAdapter(adapter);
 
 
@@ -123,22 +130,6 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         });
 
 
-        /*Bundle extras = getIntent().getExtras();
-        if (extras!=null) {
-            uebergabeArray = extras.getStringArray("uebergabeKey");
-        //    String[] arrayTmp = uebergabeArray;
-            for (int i = 0; i < uebergabeArray.length; i+=2) {
-                ArrayList tmpList = new ArrayList(2);
-
-                if (i % 2 == 0) {
-                    tmpList.add(uebergabeArray[i]);
-                    tmpList.add(uebergabeArray[i+1]);
-                }
-                listeNameundDatum.add(tmpList);
-            }
-            //Testausgabe von 2 Werten
-            test.setText((String) listeNameundDatum.get(0).get(0));
-        }*/
 
 
 
