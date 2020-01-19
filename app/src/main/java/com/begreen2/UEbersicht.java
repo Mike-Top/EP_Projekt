@@ -28,78 +28,79 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
     private TextView test;
     private String[] uebergabeArray;
-    public ArrayList<ArrayList<String>> listeNameundDatum = new ArrayList();
+    public ArrayList<ArrayList<String>> listeNameundDatum = new ArrayList<ArrayList<String>>();
     private String bla;
+    private Produktdaten produktdaten;
+    ArrayList<Produktdaten> produktdatenliste = new ArrayList<>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uebersicht);
+        test = (TextView) findViewById(R.id.textViewUebersicht);
 
         getSupportActionBar().setTitle("Übersicht");
         // TestString für die Liste:
+     //   ArrayList<String> list = new ArrayList<>();
         ArrayList<String> list = new ArrayList<>();
 
-        test = (TextView) findViewById(R.id.textViewUebersicht);
 
         //Liste<String> liste = new Liste;
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
-        list.add("Banana");
-        list.add("Apple");
+//        list.add(listeNameundDatum.get(0));
+//        list.add(listeNameundDatum.get(1));
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
+//        list.add("Banana");
+//        list.add("Apple");
 
 
 //        Bundle extras = getIntent().getExtras();
 //        if (extras!=null) {
 //            bla = extras.getString("bla");}
 //
-//        test.setText(bla);
 
         Bundle extras = getIntent().getExtras();
         if (extras!=null) {
             uebergabeArray = extras.getStringArray("uebergabeKey");
             String[] arrayTmp = uebergabeArray;
             for (int i = 0; i < arrayTmp.length; i+=2) {
-                ArrayList tmpList = new ArrayList(2);
+                Produktdaten tmpDaten = null;
 
                 if (i % 2 == 0) {
-                    tmpList.add(arrayTmp[i]);
-                    tmpList.add(arrayTmp[i+1]);
+                    tmpDaten = new Produktdaten(arrayTmp[0], arrayTmp[1]);
+           //         tmpList.add(arrayTmp[i+1]);
                 }
-                listeNameundDatum.add(tmpList);
+                produktdatenliste.add(tmpDaten);
             }
             //Testausgabe von 2 Werten
-            test.setText((String) listeNameundDatum.get(0).get(0));
+            test.setText((String) produktdatenliste.get(0).getPrduktName());
         }
 
 
         /**  Liste  **/
         ListView listView = (ListView) findViewById(R.id.listViewNeu);
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-        QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, list);
-        adapter.datenUebergabe(listeNameundDatum);
+        QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, produktdatenliste);
+        adapter.datenUebergabe(produktdatenliste);
         //adapter.datenUebergabe2(bla);
         listView.setAdapter(adapter);
 

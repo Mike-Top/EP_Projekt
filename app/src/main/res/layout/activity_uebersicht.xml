@@ -7,6 +7,13 @@
     tools:context=".UEbersicht"
     >
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:id="@+id/listViewNeu"
+        />
+
     <TextView
         android:id="@+id/textViewUebersicht"
         android:layout_width="wrap_content"
@@ -23,11 +30,7 @@
         app:menu="@menu/menu_navigation"
         android:layout_alignParentBottom="true"/>
 
-    <ListView
-        android:id="@+id/listViewNeu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+
 
 
 </RelativeLayout>
