@@ -8,20 +8,18 @@ import java.util.List;
 public class SpoonacularApi {
 
     // Durch @SerializedName - Annotation wird kein Konstruktor gebraucht
-    private List<RezeptsucheResults> results;
+    private List < RezeptsucheResults > results;
 
-    public SpoonacularApi(List<RezeptsucheResults> results) {
+    public SpoonacularApi(List < RezeptsucheResults > results) {
         this.results = results;
     }
-
-    public List<RezeptsucheResults> getResults() {
+    public List < RezeptsucheResults > getResults() {
         return results;
     }
 }
 
 
 class RezeptsucheResults{
-
     @SerializedName("title")
     private String title;
     @SerializedName("readyInMinutes")
@@ -34,7 +32,6 @@ class RezeptsucheResults{
     public String getTitle() {
         return title;
     }
-
     public int getReadyInMinutes() {
         return readyInMinutes;
     }
@@ -53,8 +50,9 @@ class RezeptsucheResults{
 // API Rückgabe REZEPTSUCHE
 
 //{7 items
-//        "results":[8 items            <----- ArrayList
-//          0:{6 items
+//        "results":
+//        [            <----- ArrayList
+//          0:{
 //            "id":864592
 //            "title":"Black Bean Mushroom Burgers with Chipotle Mayo"
 //            "readyInMinutes":25

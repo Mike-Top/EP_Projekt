@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -75,7 +76,10 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
                     case R.id.uebersicht:
                         return true;
                     case R.id.recipe:
-                        startActivity(new Intent(getApplicationContext(), Rezepte.class));
+                    //    startActivity(new Intent(getApplicationContext(), Rezepte.class));
+                        Intent i = new Intent(getApplicationContext(), Rezepte.class);
+                        if(produktdatenliste!=null) {i.putExtra("suchWert", produktdatenliste.get(0).getPrduktName());}
+                        startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
                 }
