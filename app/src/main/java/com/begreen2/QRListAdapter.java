@@ -1,6 +1,7 @@
 package com.begreen2;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,20 +28,37 @@ class QRListAdapter extends ArrayAdapter<Produktdaten> {
         mresource = resource;
     }
 
-    @NonNull
+        @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        //String name = getItem(position).;
+        //String birthday = getItem(position).getBirthday();
+        //String sex = getItem(position).getSex();
 
+
+        // Test Strings....
+        //   String name = test;
+        //   String datum = "12.12.2012";
         String name = getItem(position).getPrduktName();
         String datum = getItem(position).getDatum();
 
         Produktdaten produktdaten = new Produktdaten(name, datum);
+
+//        String name = getItem(position).get(0);
+//        String datum = getItem(position).get(1);
 
         LayoutInflater inflater = LayoutInflater.from(qrContext);
         convertView = inflater.inflate(mresource, parent, false);
 
         TextView textViewName = (TextView) convertView.findViewById(R.id.textView1);
         TextView textViewDatum = (TextView) convertView.findViewById(R.id.textView2);
+
+//        for (int i = 0; i < listeNameundDatum2.size(); i+=2){
+//            String name = listeNameundDatum2.get(i).get(i);
+//            String datum = listeNameundDatum2.get(i).get(i+1);
+//            textViewName.setText(name);
+//            textViewDatum.setText(datum);
+//        }
 
         textViewName.setText(name);
         textViewDatum.setText(datum);
@@ -57,5 +75,3 @@ class QRListAdapter extends ArrayAdapter<Produktdaten> {
     }
 
 }
-
-// Quelle: https://www.youtube.com/watch?v=E6vE8fqQPTE
