@@ -22,8 +22,31 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="55dp"
         android:layout_marginRight="55dp"
-        android:layout_marginTop="122dp"
+        android:layout_marginTop="70dp"
         android:text="TextView"
         android:textColor="@android:color/background_dark" />
+<!--
+    <TextView
+        android:id="@+id/testAusgabe2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
+        android:text="TextView"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@id/testAusgabe"/>
+
+
+    <TextView
+        android:id="@+id/testAusgabe3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp"
+        android:text="TextView"
+        android:textColor="@android:color/background_dark"
+        android:layout_below="@id/testAusgabe2"/>
+-->
+
 
 </RelativeLayout>

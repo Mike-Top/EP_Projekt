@@ -44,18 +44,18 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uebersicht);
-        test = (TextView) findViewById(R.id.textViewUebersicht);
+   //     test = (TextView) findViewById(R.id.textViewUebersicht);
 
         getSupportActionBar().setTitle("Übersicht");
         // TestString für die Liste:
-     //   ArrayList<String> list = new ArrayList<>();
+        //   ArrayList<String> list = new ArrayList<>();
         ArrayList<String> list = new ArrayList<>();
 
 
 
 
 
-    //    loadData();     // Auskommentieren für Liste leeren (cheatweg)
+        //    loadData();     // Auskommentieren für Liste leeren (cheatweg)
         /** Für save: **/
 //        Button buttonSave = findViewById(R.id.button_save);
 //        buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -76,19 +76,19 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
                 if (i % 2 == 0) {
                     tmpDaten = new Produktdaten(arrayTmp[i], arrayTmp[i+1]);
-           //         tmpList.add(arrayTmp[i+1]);
+                    //         tmpList.add(arrayTmp[i+1]);
                 }
                 produktdatenliste.add(tmpDaten);
             }
             //Testausgabe von 2 Werten
-            test.setText((String) produktdatenliste.get(0).getPrduktName());
+         //   test.setText((String) produktdatenliste.get(0).getPrduktName());
         }
 
         saveData();
 
 
         /**  Liste  **/
-        ListView listView = (ListView) findViewById(R.id.listViewNeu);
+        ListView listView = (ListView) findViewById(R.id.listViewNEU);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, produktdatenliste);
         adapter.datenUebergabe(produktdatenliste);
         //adapter.datenUebergabe2(bla);
@@ -112,7 +112,7 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
                     case R.id.uebersicht:
                         return true;
                     case R.id.recipe:
-                    //    startActivity(new Intent(getApplicationContext(), Rezepte.class));
+                        //    startActivity(new Intent(getApplicationContext(), Rezepte.class));
                         Intent i = new Intent(getApplicationContext(), Rezepte.class);
                         if(produktdatenliste!=null) {i.putExtra("suchWert", produktdatenliste.get(0).getPrduktName());}
                         startActivity(i);
@@ -150,5 +150,3 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
 
 }
-
-

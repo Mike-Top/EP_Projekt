@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,7 +28,10 @@ import okhttp3.Response;
 public class Rezepte extends AppCompatActivity {
 
     private TextView TextViewResult;
+    private TextView TextViewResult2;
+    private TextView TextViewResult3;
     private String suchWert = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +63,9 @@ public class Rezepte extends AppCompatActivity {
             }
         });
 
-
         TextViewResult = (TextView) findViewById(R.id.testAusgabe);
+//        TextViewResult2 = (TextView) findViewById(R.id.testAusgabe2);
+//        TextViewResult3 = (TextView) findViewById(R.id.testAusgabe3);
         OkHttpClient client = new OkHttpClient();
 
 
@@ -96,8 +102,10 @@ public class Rezepte extends AppCompatActivity {
 //                    final String test = myobject.getData().getEmail();
 
                         // ---------------- Spoonacular API -----------------------> FUNKTIONIERT AUCH - Verbraucht Requests
-                        SpoonacularApi myobject = new Gson().fromJson(myResponse, SpoonacularApi.class);
+                        final SpoonacularApi myobject = new Gson().fromJson(myResponse, SpoonacularApi.class);
                         final String title = myobject.getResults().get(0).getTitle();
+//                        final int ready = myobject.getResults().get(0).getReadyInMinutes();
+//                        final int servings = myobject.getResults().get(0).getServings();
 
                         // ---------------- SpoonacularIngredients API -----------------------> Verbraucht Requests
 //                    SpoonacularApiIngredients myobject = new Gson().fromJson(myResponse, SpoonacularApiIngredients.class);
@@ -111,14 +119,17 @@ public class Rezepte extends AppCompatActivity {
                             public void run() {
                                 //TextViewResult.setText(test);          // Test API Ausgabe
                                 TextViewResult.setText(title);       // Spoonacular Testausgabe
+//                                TextViewResult2.setText(ready);
+//                                TextViewResult2.setText(servings);
+
                             }
                         });
                     }
                 }
             });
+
+
         }
-
-
 
 
     }
@@ -144,6 +155,7 @@ public class Rezepte extends AppCompatActivity {
                 .addHeader("x-rapidapi-key", "e406a6096dmsh4677d4f778bf5f4p17452fjsna50032559fb4")
                 .build();
     }
+
 
 
 }
