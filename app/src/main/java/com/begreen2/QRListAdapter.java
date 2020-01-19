@@ -28,8 +28,7 @@ class QRListAdapter extends ArrayAdapter<Produktdaten> {
         mresource = resource;
     }
 
-
-    @NonNull
+        @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //String name = getItem(position).;
