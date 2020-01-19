@@ -28,56 +28,16 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
     private TextView test;
     private String[] uebergabeArray;
-    public ArrayList<ArrayList<String>> listeNameundDatum = new ArrayList<ArrayList<String>>();
-    private String bla;
-    private Produktdaten produktdaten;
-    ArrayList<Produktdaten> produktdatenliste = new ArrayList<>();
+    ArrayList<Produktdaten> produktdatenliste = new ArrayList();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uebersicht);
+        getSupportActionBar().setTitle("Übersicht");
         test = (TextView) findViewById(R.id.textViewUebersicht);
 
-        getSupportActionBar().setTitle("Übersicht");
-        // TestString für die Liste:
-     //   ArrayList<String> list = new ArrayList<>();
-        ArrayList<String> list = new ArrayList<>();
-
-
-        //Liste<String> liste = new Liste;
-//        list.add(listeNameundDatum.get(0));
-//        list.add(listeNameundDatum.get(1));
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-//        list.add("Banana");
-//        list.add("Apple");
-
-
-//        Bundle extras = getIntent().getExtras();
-//        if (extras!=null) {
-//            bla = extras.getString("bla");}
-//
 
         Bundle extras = getIntent().getExtras();
         if (extras!=null) {
@@ -87,8 +47,7 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
                 Produktdaten tmpDaten = null;
 
                 if (i % 2 == 0) {
-                    tmpDaten = new Produktdaten(arrayTmp[0], arrayTmp[1]);
-           //         tmpList.add(arrayTmp[i+1]);
+                    tmpDaten = new Produktdaten(arrayTmp[i], arrayTmp[i+1]);
                 }
                 produktdatenliste.add(tmpDaten);
             }
@@ -96,9 +55,8 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
             test.setText((String) produktdatenliste.get(0).getPrduktName());
         }
 
-
         /**  Liste  **/
-        ListView listView = (ListView) findViewById(R.id.listViewNeu);
+        ListView listView = (ListView) findViewById(R.id.listViewNEU);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, produktdatenliste);
         adapter.datenUebergabe(produktdatenliste);
         //adapter.datenUebergabe2(bla);
@@ -131,10 +89,7 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         });
 
 
-
-
-
-    } // on Create ENDE
+    }
 
 
 }

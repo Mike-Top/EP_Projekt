@@ -1,14 +1,8 @@
 package com.begreen2;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Produktdaten implements Serializable {
-
-//    ArrayList<String> list;
-//    ArrayList<String> dateList;
-
-//    private ArrayList<ArrayList> listNameAndDate;
 
     private String prduktName;
     private String Datum;
