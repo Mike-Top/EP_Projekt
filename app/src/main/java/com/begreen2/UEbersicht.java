@@ -54,15 +54,15 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
 
 
 
-        loadData();     // Auskommentieren für Liste leeren (cheatweg)
+    //    loadData();     // Auskommentieren für Liste leeren (cheatweg)
         /** Für save: **/
-       Button buttonSave = findViewById(R.id.button_save);
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-            }
-        });
+//        Button buttonSave = findViewById(R.id.button_save);
+//        buttonSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                saveData();
+//            }
+//        });
 
 
 
@@ -82,6 +82,8 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
             //Testausgabe von 2 Werten
             test.setText((String) produktdatenliste.get(0).getPrduktName());
         }
+
+        saveData();
 
 
         /**  Liste  **/
