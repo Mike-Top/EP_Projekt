@@ -30,15 +30,11 @@ import github.nisrulz.qreader.QREader;
 public class MainActivity extends AppCompatActivity implements Serializable {
 
     private TextView txt_result;
-    private TextView test;
-    private TextView date;
-    private TextView TextViewResult;
 
     private SurfaceView surfaceView;
     private QREader qrEader;
     private ArrayList<ArrayList<String>> listNameAndDate = new ArrayList<ArrayList<String>>();
     private String[] uebergabeArray;
- //   private String mainBla = "bla";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     case R.id.uebersicht:
                         Intent i = new Intent(getApplicationContext(), UEbersicht.class);
                         if(uebergabeArray!=null) {i.putExtra("uebergabeKey", uebergabeArray);}
-                 //       if(mainBla!=null) {i.putExtra("bla", mainBla);}
                         startActivity(i);
                         overridePendingTransition(0,0);
                         return true;
@@ -94,15 +89,8 @@ public class MainActivity extends AppCompatActivity implements Serializable {
 
     }
 
-    private void openActivity2() {
-        Intent intent = new Intent(this, Main2Activity.class);
-        startActivity(intent);
-    }
-
     private void setupCamera() {
         txt_result = (TextView) findViewById(R.id.code_info);
-        test = (TextView) findViewById(R.id.anzeigeListe);
-        date = (TextView) findViewById(R.id.date);
 
         final ToggleButton btn_on_off = (ToggleButton) findViewById(R.id.btn_enable_disable);
 
@@ -134,10 +122,9 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                     public void run() {
                         txt_result.setText(data);
 
-                        final String data3 = data;
-                        final String data2 = "Banane, 22.22.2222, Apfel, 33.33.3333";
+                        final String dataTmp = data;
                         // Eingelesener QR Code wird unterteilt in Arrays
-                        uebergabeArray = data3.split(", ");
+                        uebergabeArray = dataTmp.split(", ");
                         String[] arrayTmp = uebergabeArray;
                         for (int i = 0; i < arrayTmp.length; i+=2) {
 
@@ -150,9 +137,6 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                             listNameAndDate.add(tmpList);
                         }
 
-                        //Testausgabe von 2 Werten
-                        test.setText((String) listNameAndDate.get(0).get(0));
-                        date.setText((String) listNameAndDate.get(1).get(1));
                     }
                 });
             }

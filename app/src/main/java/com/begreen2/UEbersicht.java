@@ -26,7 +26,6 @@ import java.util.List;
 
 public class UEbersicht extends AppCompatActivity implements Serializable {
 
-    private TextView test;
     private String[] uebergabeArray;
     ArrayList<Produktdaten> produktdatenliste = new ArrayList();
 
@@ -36,7 +35,6 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_uebersicht);
         getSupportActionBar().setTitle("Übersicht");
-        test = (TextView) findViewById(R.id.textViewUebersicht);
 
 
         Bundle extras = getIntent().getExtras();
@@ -51,15 +49,12 @@ public class UEbersicht extends AppCompatActivity implements Serializable {
                 }
                 produktdatenliste.add(tmpDaten);
             }
-            //Testausgabe von 2 Werten
-            test.setText((String) produktdatenliste.get(0).getPrduktName());
         }
 
         /**  Liste  **/
         ListView listView = (ListView) findViewById(R.id.listViewNEU);
         QRListAdapter adapter = new QRListAdapter(this, R.layout.adapter_view_layout, produktdatenliste);
         adapter.datenUebergabe(produktdatenliste);
-        //adapter.datenUebergabe2(bla);
         listView.setAdapter(adapter);
 
 
